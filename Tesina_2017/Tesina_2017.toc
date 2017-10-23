@@ -9,7 +9,7 @@
 \contentsline {subsection}{\numberline {2.4}\relax \fontsize {12}{14}\selectfont Un esempio di applicazione pratica}{8}
 \contentsline {subsubsection}{\numberline {2.4.1}Consistenza fra modello e dati}{9}
 \contentsline {subsubsection}{\numberline {2.4.2}Compatibilit\IeC {\`a} algoritmo e modello}{10}
-\contentsline {subsubsection}{\numberline {2.4.3}Compatibilit\IeC {\`a} fra modello e dati}{10}
+\contentsline {subsubsection}{\numberline {2.4.3}Compatibilit\IeC {\`a} fra algoritmo e dati}{10}
 \contentsline {subsubsection}{\numberline {2.4.4}Compatibilit\IeC {\`a} fra metodo e domande}{10}
 \contentsline {subsubsection}{\numberline {2.4.5}Approcci possibili}{11}
 \contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Un software per l'analisi cross-sectional: BML}{11}
