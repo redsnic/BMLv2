@@ -77,7 +77,7 @@ void MAFtranslator::translate(){
         QString mutationsText = ui->mutationText->toPlainText();
         QStringList list = mutationsText.split(QRegExp("\\s+"));
         for(int i = 0; i<list.size(); i++){
-            mutations.push_back(list.at(i).toStdString());
+            mutations.push_back(list.at(i).toUpper().toStdString());
         }
     }
 
@@ -86,7 +86,7 @@ void MAFtranslator::translate(){
         QStringList list = geneText.split(QRegExp("\\s+"));
         for(int i = 0; i<list.size(); i++){
             if(list.at(i) != ""){
-                genes.push_back(list.at(i).toStdString());
+                genes.push_back(list.at(i).toUpper().toStdString());
             }
         }
         std::sort(genes.begin(), genes.end(), [](std::string a, std::string b){ return b < a; }); // sort in lex order

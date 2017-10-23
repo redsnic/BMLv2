@@ -159,7 +159,7 @@ bool MAFtoMatrixTranslator::populateDataMatrix(ifstream& mafInput, vector<string
                 if( all || standard ){
                     found = true;
                 }else{
-                    found = any_of(begin(selectedTypesOfMutation), end(selectedTypesOfMutation), [&](string i){ return (type == i); });
+                    found = any_of(begin(selectedTypesOfMutation), end(selectedTypesOfMutation), [&](string i){ cout<<genere<<endl; return (genere == i); });
                 }
 
                 if((genere != "SNP" && genere != "DEL"  && genere != "INS") && standard){  // keep only SNP or INDEL (STD)
