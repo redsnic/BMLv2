@@ -1,38 +1,37 @@
-\contentsline {section}{\numberline {1}\relax \fontsize {17.28}{22}\selectfont Abstract}{2}
-\contentsline {section}{\numberline {2}\relax \fontsize {17.28}{22}\selectfont L'analisi filogenetica per lo studio dei tumori}{3}
-\contentsline {subsection}{\numberline {2.1}\relax \fontsize {12}{14}\selectfont Introduzione generale}{3}
-\contentsline {subsection}{\numberline {2.2}\relax \fontsize {12}{14}\selectfont Le diverse tipologie di studio ed analisi}{5}
-\contentsline {subsection}{\numberline {2.3}\relax \fontsize {12}{14}\selectfont Approfondimento sulle tipologie di studio}{5}
-\contentsline {subsubsection}{\numberline {2.3.1}Modelli per gli studi Cross-sectional}{7}
-\contentsline {subsubsection}{\numberline {2.3.2}Regional Bulk}{7}
-\contentsline {subsubsection}{\numberline {2.3.3}Single Cell}{8}
-\contentsline {subsection}{\numberline {2.4}\relax \fontsize {12}{14}\selectfont Un esempio di applicazione pratica}{8}
-\contentsline {subsubsection}{\numberline {2.4.1}Consistenza fra modello e dati}{9}
-\contentsline {subsubsection}{\numberline {2.4.2}Compatibilit\IeC {\`a} algoritmo e modello}{10}
-\contentsline {subsubsection}{\numberline {2.4.3}Compatibilit\IeC {\`a} fra algoritmo e dati}{10}
-\contentsline {subsubsection}{\numberline {2.4.4}Compatibilit\IeC {\`a} fra metodo e domande}{10}
-\contentsline {subsubsection}{\numberline {2.4.5}Approcci possibili}{11}
-\contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Un software per l'analisi cross-sectional: BML}{11}
-\contentsline {subsection}{\numberline {3.1}\relax \fontsize {12}{14}\selectfont Introduzione}{11}
-\contentsline {subsection}{\numberline {3.2}\relax \fontsize {12}{14}\selectfont L'approccio di BML}{12}
-\contentsline {subsection}{\numberline {3.3}\relax \fontsize {12}{14}\selectfont Learning della rete bayesiana e ricostruzione degli EPP}{12}
-\contentsline {subsubsection}{\numberline {3.3.1}I dati}{12}
-\contentsline {subsubsection}{\numberline {3.3.2}Il modello}{13}
-\contentsline {subsubsection}{\numberline {3.3.3}Apprendere le distribuzioni di probabilit\IeC {\`a}}{14}
-\contentsline {subsubsection}{\numberline {3.3.4}Semplificazioni e assunzioni}{14}
-\contentsline {subsubsection}{\numberline {3.3.5}Algoritmo di learning dei parametri della rete bayesiana}{14}
-\contentsline {subsubsection}{\numberline {3.3.6}Ricostruzione dei EPP pi\IeC {\`u} probabili}{14}
-\contentsline {subsubsection}{\numberline {3.3.7}Fitness epistasis e la sequenza delle mutazioni}{15}
-\contentsline {subsubsection}{\numberline {3.3.8}Procedure di bootstrap}{15}
-\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Guida e apporti personali a BML}{15}
-\contentsline {subsection}{\numberline {4.1}\relax \fontsize {12}{14}\selectfont Apporti personali}{15}
-\contentsline {subsection}{\numberline {4.2}\relax \fontsize {12}{14}\selectfont Guida}{16}
-\contentsline {subsubsection}{\numberline {4.2.1}Compilazione ed esecuzione}{16}
-\contentsline {subsubsection}{\numberline {4.2.2}Interfaccia primaria}{16}
-\contentsline {subsubsection}{\numberline {4.2.3}Il men\IeC {\`u} di help}{18}
-\contentsline {subsubsection}{\numberline {4.2.4}Il preprocessore MAF}{19}
-\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Confronto tra BML e CAPRI}{20}
-\contentsline {subsection}{\numberline {5.1}\relax \fontsize {12}{14}\selectfont CAPRI: aspetti fondamentali}{20}
-\contentsline {subsection}{\numberline {5.2}\relax \fontsize {12}{14}\selectfont Il confronto}{21}
-\contentsline {subsection}{\numberline {5.3}\relax \fontsize {12}{14}\selectfont Note sul lavoro di Alice Tarzariol}{26}
-\contentsline {section}{\numberline {6}\relax \fontsize {17.28}{22}\selectfont Conclusione}{26}
+\contentsline {section}{\numberline {1}\relax \fontsize {17.28}{22}\selectfont Abstract}{2}{section.1}
+\contentsline {section}{\numberline {2}\relax \fontsize {17.28}{22}\selectfont L'analisi filogenetica per lo studio dei tumori}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}\relax \fontsize {12}{14}\selectfont Introduzione generale}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}\relax \fontsize {12}{14}\selectfont Le diverse tipologie di studio ed analisi}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}\relax \fontsize {12}{14}\selectfont Approfondimento sulle tipologie di studio}{5}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Modelli per gli studi Cross-sectional}{7}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Regional Bulk}{7}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Single Cell}{8}{subsubsection.2.3.3}
+\contentsline {subsection}{\numberline {2.4}\relax \fontsize {12}{14}\selectfont Un esempio di applicazione pratica}{8}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Consistenza fra modello e dati}{9}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Compatibilit\IeC {\`a} algoritmo e modello}{10}{subsubsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.3}Compatibilit\IeC {\`a} fra algoritmo e dati}{10}{subsubsection.2.4.3}
+\contentsline {subsubsection}{\numberline {2.4.4}Compatibilit\IeC {\`a} fra metodo e domande}{10}{subsubsection.2.4.4}
+\contentsline {subsubsection}{\numberline {2.4.5}Approcci possibili}{11}{subsubsection.2.4.5}
+\contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Un software per l'analisi cross-sectional: BML}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}\relax \fontsize {12}{14}\selectfont Introduzione}{11}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}\relax \fontsize {12}{14}\selectfont L'approccio di BML}{12}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}\relax \fontsize {12}{14}\selectfont Learning della rete bayesiana e ricostruzione degli EPP}{12}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}I dati}{12}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Il modello}{13}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Apprendere le distribuzioni di probabilit\IeC {\`a}}{14}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}Semplificazioni e assunzioni}{14}{subsubsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.5}Algoritmo di learning dei parametri della rete bayesiana}{14}{subsubsection.3.3.5}
+\contentsline {subsubsection}{\numberline {3.3.6}Ricostruzione dei EPP pi\IeC {\`u} probabili}{14}{subsubsection.3.3.6}
+\contentsline {subsubsection}{\numberline {3.3.7}Fitness epistasis e la sequenza delle mutazioni}{15}{subsubsection.3.3.7}
+\contentsline {subsubsection}{\numberline {3.3.8}Procedure di bootstrap}{15}{subsubsection.3.3.8}
+\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Guida e apporti personali a BML}{15}{section.4}
+\contentsline {subsection}{\numberline {4.1}\relax \fontsize {12}{14}\selectfont Apporti personali}{15}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}\relax \fontsize {12}{14}\selectfont Guida}{16}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Interfaccia primaria}{16}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}Il men\IeC {\`u} di help}{18}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}Il preprocessore MAF}{18}{subsubsection.4.2.3}
+\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Confronto tra BML e CAPRI}{20}{section.5}
+\contentsline {subsection}{\numberline {5.1}\relax \fontsize {12}{14}\selectfont CAPRI: aspetti fondamentali}{20}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}\relax \fontsize {12}{14}\selectfont Il confronto}{21}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}\relax \fontsize {12}{14}\selectfont Note sul lavoro di Alice Tarzariol}{26}{subsection.5.3}
+\contentsline {section}{\numberline {6}\relax \fontsize {17.28}{22}\selectfont Conclusione}{26}{section.6}

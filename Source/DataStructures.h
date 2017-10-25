@@ -45,7 +45,7 @@ struct FAM {
 	double score;
 	int numberOfParents;
 	int order;                            //  Gene order during OBS
-	bool hasNoParent;
+    bool hasParent;
 };
 
 /* a node of the Bayesan Network */

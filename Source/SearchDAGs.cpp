@@ -231,7 +231,7 @@ void searchDAGs( vector<FAM>& DAG, vector<NODE>& Tree, char op )
 
     for(unsigned int i=0;i<DAG.size();i++)
 	{
-        if(DAG[i].hasNoParent==true || op=='n'){ k2Search(DAG[i],DAG,Tree,i,op); }
+        if(DAG[i].hasParent==true || op=='n'){ k2Search(DAG[i],DAG,Tree,i,op); }
 	}
 
 	while(opt==false)                                      // search for optimum ordering (by perturbating the bayesan network)

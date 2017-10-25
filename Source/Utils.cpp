@@ -24,6 +24,8 @@
 
 using namespace std; 
 
+/* Utilities for pruning and DAG initialization */
+
 /**
  * Basic DAG initialization (from globalPruning output)
  *
@@ -51,9 +53,49 @@ void initializeDAG(vector<FAM>& DAG)
 }
 
 /**
+ * Computes the probability of having the exactly the amount of mutations considered for each gene
+ * and the probability of having a mutation in a gene. The data is then stored in the bayesan network.
+ *
+ * @param bayesanNet     the bayesan network.
+ * 						 Will be updated with numberOfMutations for each gene,
+ * 						 probability of having such number of mutations considering a Bernoulli distribution (so randomly)
+ * 						 and the probability of having a mutation in a gene randomly considering a sample.
+ *
+ * @param phylogeny      the phylogeny (to analyze the number of mutations)
+ */
+void initNumberOfMutationProbability(vector<FAM>& bayesanNet, vector<NODE>& phylogeny)
+{
+    for(unsigned int i=0;i<bayesanNet.size();i++)                                // for each gene
+    {
+        double numberOfMutations=0.0;
+        double numberOfSamples=phylogeny.size();
+        for(unsigned int k=0;k<phylogeny.size();k++)
+        {
+            if(phylogeny[k].genotype[i]==true){numberOfMutations+=1.0;}          // count the number of mutations
+        }
+
+        bayesanNet[i].numberOfMutations=numberOfMutations;                       // store it
+        double theta=numberOfMutations/numberOfSamples;                          // compute its probability
+        if(theta>0.0)
+        {
+            bayesanNet[i].numberOfMutationsProbability = - numberOfMutations*log(theta)-(numberOfSamples-numberOfMutations)*log(1.0-theta);
+            // log probability of i ( Bernoulli distribution )
+        }
+        else
+        {
+            bayesanNet[i].numberOfMutationsProbability=0.0;
+        }
+
+        bayesanNet[i].k2Parameters.erase(bayesanNet[i].k2Parameters.begin(),bayesanNet[i].k2Parameters.end());
+        bayesanNet[i].k2Parameters.push_back(1.0-theta);                          // k2Parameters contains now the probability of a mutation in the given gene
+        bayesanNet[i].k2Parameters.push_back(theta);                              // and its complement (first parameter)
+    }
+}
+
+/**
  * Computes likelihood score and compares it to logarithm of the total number of samples
  * (refer to chapter 2.2 (formula 9) of the supplementary informations)
- *
+ * (local pruning)
  * @param i        potential parent (gene)
  * @param j        potential child  (gene)
  * @param tree     phylogenetic tree
@@ -103,51 +145,8 @@ bool likelihoodTestLocal(int i, int j,  vector<NODE>& Tree )
     }
 }
 
-
 /**
- * Computes the probability of having the exactly the amount of mutations considered for each gene
- * and the probability of having a mutation in a gene. The data is then stored in the bayesan network.
- *
- * @param bayesanNet     the bayesan network.
- * 						 Will be updated with numberOfMutations for each gene,
- * 						 probability of having such number of mutations considering a Bernoulli distribution (so randomly)
- * 						 and the probability of having a mutation in a gene randomly considering a sample.
- *
- * @param phylogeny      the phylogeny (to analyze the number of mutations)
- */
-void initNumberOfMutationProbability(vector<FAM>& bayesanNet, vector<NODE>& phylogeny)
-{
-    for(unsigned int i=0;i<bayesanNet.size();i++)                                // for each gene
-    {
-        double numberOfMutations=0.0;
-        double numberOfSamples=phylogeny.size();
-        for(unsigned int k=0;k<phylogeny.size();k++)
-        {	
-            if(phylogeny[k].genotype[i]==true){numberOfMutations+=1.0;}          // count the number of mutations
-        }
-
-        bayesanNet[i].numberOfMutations=numberOfMutations;                       // store it
-        double theta=numberOfMutations/numberOfSamples;                          // compute its probability
-        if(theta>0.0)
-        {
-        	bayesanNet[i].numberOfMutationsProbability = - numberOfMutations*log(theta)-(numberOfSamples-numberOfMutations)*log(1.0-theta);
-        	// log probability of i ( Bernoulli distribution )
-        }
-        else
-        {
-        	bayesanNet[i].numberOfMutationsProbability=0.0;
-        }
-
-        bayesanNet[i].k2Parameters.erase(bayesanNet[i].k2Parameters.begin(),bayesanNet[i].k2Parameters.end());
-        bayesanNet[i].k2Parameters.push_back(1.0-theta);                          // k2Parameters contains now the probability of a mutation in the given gene
-        bayesanNet[i].k2Parameters.push_back(theta);                              // and its complement (first parameter)
-    }
-}
-
-
-
-/**
- * Initialize the subtree structure and potential parents for each gene.
+ * Initializes the subtree structure and potential sets parents for each gene.
  * (refer to supplementary data section 2)
  *
  * @param DAG       the bayesan network
@@ -163,7 +162,7 @@ void localPruning( vector<FAM>& DAG, vector<NODE>& tree )
 
     for(unsigned int i=0; i<DAG.size()-1; i++)          // for each gene
     {
-        if(DAG[i].hasNoParent==true)                    // for each potential parent
+        if(DAG[i].hasParent==true)                      // for each potential parent
         {
             for(unsigned int j=i+1; j<DAG.size(); j++)  // check following gene
             {
@@ -203,7 +202,7 @@ void initDAG(vector<FAM>& DAG, vector<FAM>& BN)
 /**
  * Computes likelihood score and compares it to logarithm of the total number of possible pairings
  * (refer to chapter 2.2 of the supplementary informations)
- *
+ * (global pruning)
  * (A and B are genes)
  * @param numberOfCoOccurrences     number of times A and B are both mutated in a sample
  * @param Atot                      A's number of mutations
@@ -252,8 +251,6 @@ bool likelihoodTestGlobal(double& numberOfCoOccurrences, double& Atot, double& B
         }
     }
     
-    
-    
     if(MinfMax>log(TotS) )           // if the score is over the logarithm of the total number of possible pairings the test is passed
     {
         return true;
@@ -270,7 +267,7 @@ bool likelihoodTestGlobal(double& numberOfCoOccurrences, double& Atot, double& B
  *
  * @param BayesNet  used for output, content is replaced
  * @param Tree      a tree with initialized vertexes
- * @param op        if 'y' prints a summary of the operations executed on the standard output and on the output file
+ * @param op        if 'y' prints a summary of the operations executed on the standard output and on the output file (Pruning)
  * @param job       the name of the job (used for output)
  */
 void globalPruning( vector<FAM>& BayesNet, vector<NODE>& Tree, char op, string& job)
@@ -289,7 +286,7 @@ void globalPruning( vector<FAM>& BayesNet, vector<NODE>& Tree, char op, string& 
     }
 
     famtemp.potentialParents=famtemp.parents;
-    famtemp.hasNoParent=false;
+    famtemp.hasParent=false;
     famtemp.numberOfParents=0;
     famtemp.numberOfMutations=0.0;
     famtemp.score=0.0;
@@ -326,12 +323,11 @@ void globalPruning( vector<FAM>& BayesNet, vector<NODE>& Tree, char op, string& 
             }
             
         }
-        
     }
 
     /* Sorting by decreasing freq (via BubbleSort)*/
 
-    int c1=0;
+    int Count=0;
     for(unsigned int i=0;i<BayesNet.size()-1;i++)
     {
         for(unsigned int j=i+1;j<BayesNet.size();j++)
@@ -349,14 +345,12 @@ void globalPruning( vector<FAM>& BayesNet, vector<NODE>& Tree, char op, string& 
         }
     }
 
-    /* Saving the new order */
-
-    for(unsigned int i=0;i<BayesNet.size();i++)
+    for(unsigned int i=0;i<BayesNet.size();i++) // Saving the new order
     {
         BayesNet[Order[i]].order=i;
     }
     
-    /* FAM fields initialization */
+    /* FAM nodes initialization */
     
     for(unsigned int i=0;i<BayesNet.size()-1;i++)
     {
@@ -374,9 +368,9 @@ void globalPruning( vector<FAM>& BayesNet, vector<NODE>& Tree, char op, string& 
             {
                 BayesNet[i].potentialParents[j]=true;       // if the test is passed
                 BayesNet[j].potentialParents[i]=true;       // this two genes (nodes) can possibly be related
-                BayesNet[i].hasNoParent=true;
-                BayesNet[j].hasNoParent=true;
-                c1++;
+                BayesNet[i].hasParent=true;
+                BayesNet[j].hasParent=true;
+                Count++;
             }
             
         }
@@ -390,20 +384,19 @@ void globalPruning( vector<FAM>& BayesNet, vector<NODE>& Tree, char op, string& 
         fstream prnFile;
         prnFile.open(prn.c_str(),ios::out);
         
-        cout<<"Total Num of Edges "<<BayesNet.size()*(BayesNet.size()-1)/2.0<<endl<<"Num of unpruned edges "<<c1<<endl;
-        prnFile<<"Total Num of Edges "<<BayesNet.size()*(BayesNet.size()-1)/2.0<<endl<<"Num of unpruned edges"<<c1<<endl;
+        cout<<"Total Num of Edges "<<BayesNet.size()*(BayesNet.size()-1)/2.0<<endl<<"Num of unpruned edges "<<Count<<endl;
+        prnFile<<"Total Num of Edges "<<BayesNet.size()*(BayesNet.size()-1)/2.0<<endl<<"Num of unpruned edges"<<Count<<endl;
         
-        c1=0;
-        for(unsigned int i=0;i<BayesNet.size();i++)
-        {
-            
-            if(BayesNet[i].hasNoParent==false){
-            	c1++;
+        Count=0;
+        for(unsigned int i=0;i<BayesNet.size();i++)  // count number of genes with no parent after global pruning
+        {   
+            if(BayesNet[i].hasParent==false){
+                Count++;
             }
         }
 
-        cout<<"Total number of genes "<<BayesNet.size()<<endl<<" Number of genes with no parent after global pruning "<<c1<<endl;
-        prnFile<<"Total number of genes "<<BayesNet.size()<<endl<<"Number of genes with no parent after global pruning "<<c1<<endl;
+        cout<<"Total number of genes "<<BayesNet.size()<<endl<<" Number of genes with no parent after global pruning "<<Count<<endl;
+        prnFile<<"Total number of genes "<<BayesNet.size()<<endl<<"Number of genes with no parent after global pruning "<<Count<<endl;
         prnFile.close();
     }
     

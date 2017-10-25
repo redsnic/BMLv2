@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage{parskip}
 \usepackage{caption}
+\usepackage{hyperref}
 \graphicspath{ {Images/} }
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{dred}{rgb}{0.545,0,0}
@@ -541,23 +542,14 @@
 
 	\subsection{\large Guida}
 
-	Nota: al momento il software realizzato ancora non è disponibile online e lo sarà il prima possibile, perciò questa sezione non è completa.
-
-	Per presentare al meglio il software nella sua interezza viene proposta qui di seguito una \textbf{guida completa} al suo utilizzo. E' possibile scaricare
-	il codice sorgente di questo programma dal sito ... (TODO sito in allestimento), nella versione da compilare con i sorgenti, (TODO requisiti, guida compilazione)
-	oppure precompilata per Windows (a 32-bit) o Linux (a 64-bit) (TODO link prima di QT nelle citazioni). Il programma è stato realizzato utilizzando
+	Per presentare al meglio il software nella sua interezza viene proposta qui di seguito una \textbf{guida completa} al suo utilizzo. Il programma è stato realizzato utilizzando
 	il linguaggio C++ e per l'interfaccia grafica è stata usata la libreria portabile Qt \cite{Qt} in particolare la versione 5.9.1 per Linux e la 
-	5.8.3 (TODO) per Windows (compilata con VS2013, elemento fondamentale).
+	5.8.0 per Windows (compilata con VS2013, fondamentale per la compatibilità).
 
-	Il programma è stato testato su due macchine distinte con Ubuntu 16.04 LTS e Windows 10 (in dual boot su entrambe) utilizzanti una 
+	Il codice sorgente è disponibile assieme a questo testo ed ad una breve guida all'installazione sul sito \href{https://github.com/redsnic/BMLv2}{https://github.com/redsnic/BMLv2}.
+
+	Il testing e lo sviluppo è stato effettuato su due macchine distinte con Ubuntu 16.04 LTS e Windows 10 (in dual boot su entrambe) utilizzanti una 
 	un Intel Core i5-2520M CPU a 2.50GHz (2c/4t) e 8GB di RAM e l'altra un Intel Core i7-4820K CPU a 3.70GHz (4c/8t) e 16 GB di RAM.
-
-	\subsubsection{Compilazione ed esecuzione}
-	
-	Per eseguire il programma sfruttando i pacchetti precompilati è necessario decomprimere gli archivi scaricati (formato .zip)
-	e lanciare direttamente l'applicazione BML\_GUI.exe se si usa Windows, oppure eseguire AppRun
-	se si usa Linux (che si occupa del caricamento corretto delle librerie).
-	Per compilarlo direttamente ... (TODO)
 
 	\subsubsection{Interfaccia primaria}
 	
@@ -930,13 +922,13 @@
 	\bibitem{FerVog}
 		Fearon E. and Vogelstein B., A genetic model for colorectal tumorigenesis, Cell 61, 759-767 (1990)
 	\bibitem{MAF}
-		https://wiki.nci.nih.gov/display/TCGA/Mutation+Annotation+Format+(MAF)+Specification
+		\href{https://wiki.nci.nih.gov/display/TCGA/Mutation+Annotation+Format+(MAF)+Specification}{https://wiki.nci.nih.gov/display/TCGA/Mutation+Annotation+Format+(MAF)+Specification}
 	\bibitem{cBio}
-		http://www.cbioportal.org/
+		\href{http://www.cbioportal.org/}{http://www.cbioportal.org/}
 	\bibitem{BMLSite}
-		http://bml.molgen.mpg.de/
+		\href{http://bml.molgen.mpg.de/}{http://bml.molgen.mpg.de/}
 	\bibitem{Qt}
-		http://TODO
+		\href{https://www.qt.io/}{https://www.qt.io/}
 	\bibitem{TRONCO}
 		De Sano L. et al., TRONCO: an R package for the inference of cancer progression models from heterogeneous genomic data, arXiv:1509.07304  [q-bio.QM] (2015)
 	\bibitem{CAPRI}
@@ -944,7 +936,7 @@
 	\bibitem{Alice}
 		Tarzariol A., Towards a Logic Programming tool for cancer analysis
 	\bibitem{AliceNew}
-		http://TODO
+		\href{https://drive.google.com/open?id=0B_dYpyKcvuShR0FHN053QWxXcVE}{https://drive.google.com/open?id=0B\_dYpyKcvuShR0FHN053QWxXcVE}
 		
         \end{thebibliography}
 

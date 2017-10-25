@@ -89,7 +89,7 @@ void initTree(vector<NODE>& tree, vector<FAM>& bayesanNet) {
 
         do{
             y = (double) rand() / RAND_MAX;
-        }while(y>=1);
+        }while(y>=1);     
 
 		x = int(y * Orphans.size());
 		int leftChild = Orphans[x];

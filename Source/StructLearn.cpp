@@ -33,10 +33,6 @@ void structLearnThreadExecution( vector<FAM>& bayesanNetwork, double& oldScore, 
 
     for(int seed=0; seed<numberOfTreesToGenerate; seed++)
     {
-        if(seed == 279){
-            cout << "warning";
-        }
-
         /*	Define the basic network object		*/
 
         vector<FAM> dag(0);
@@ -67,12 +63,15 @@ void structLearnThreadExecution( vector<FAM>& bayesanNetwork, double& oldScore, 
             newScore+=dag[i].score-dag[i].numberOfMutationsProbability;    // compute score
         }
 
+        cout << "New score: "<< newScore << endl;
+
         mtx.lock();
 
         // begin of the critical section
 
-        if(newScore>oldScore || seed==0)
+        if(newScore>oldScore)
         {
+            cout << "NEW BEST SCORE: " << newScore << "(old: "<<oldScore<<")"<< endl;
             for(unsigned int i=0;i<bayesanNetwork.size();i++)              // update the bayesan network (= should be enough)
             {
                 bayesanNetwork[i]=dag[i];
@@ -126,7 +125,7 @@ bool structLearn(vector< vector<bool> >& inputMatrix, vector<SimVar>& simDAG, st
     /*	Initiate a subroutine for randomly reseeding the search procedure. Each tree serves as	*
      *	a starting point for a local search heuristic through tree space						*/
 
-    double oldScore=0.0;
+    double oldScore=INT_MIN;
 
     /* multi-threaded execution (reeseeding trees and maximizing scores) */
 
@@ -151,6 +150,7 @@ bool structLearn(vector< vector<bool> >& inputMatrix, vector<SimVar>& simDAG, st
     	threads[i].join();
     }
 
+    cout << "FINAL SCORE:" << oldScore << endl;
 
     /* preparing for output */
 

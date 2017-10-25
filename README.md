@@ -1,5 +1,26 @@
 # BMLv2
-Unofficial updated version of BML:Bayesan Mutation Landscape by Navodit Misra et al., includes a newly made GUI (made with the Qt library), a MAF preprocessor and multithreading support.
+
+Unofficial updated version of BML:Bayesan Mutation Landscape by Navodit Misra et al., includes a newly made GUI (made with the [Qt library](https://www.qt.io/)), a MAF preprocessor and multithreading support. It is compatible with both Windows and Linux.
+
+# How to get Qt libraries
+
+It is possible to download Qt directly from [here](https://www1.qt.io/download-open-source). Make sure that your version is compatible with *webenginewidgets* and *webengine*, tested version are 5.9.1 (gcc) on Linux and 5.8.0 (msvc2013) on Windows.
+
+# How to Compile on Linux
+
+To compile this programm you need to download the Source folder on your computer, move yourself inside it and run:
+
+`qmake` or `./PathToYourQtInstallation/bin/qmake`
+
+and then
+
+`make`.
+
+You can now execute the program: 
+
+`./BML_GUI`
+
+> I haven't uploaded the Windows .pro file needed by Qt yet, coming soon.
 
 # Changelog
 ## v1.0
