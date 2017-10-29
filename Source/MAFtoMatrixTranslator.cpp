@@ -261,8 +261,6 @@ bool MAFtoMatrixTranslator::prepareDataMatrix(ifstream& mafInput){
 	try {
 		while (!mafInput.eof()) {                           // read all the MAF file
 
-
-
 			getline(mafInput, line);                        // and for each line (mutation)
 			count++;
             StringTokenizer tok(line, "\t");
@@ -318,9 +316,8 @@ void MAFtoMatrixTranslator::sortAndEliminateRepetitions(vector<string>& v){
 	}
 
 	v=aux;
-
-
 }
+
 /**
  * Skips comments (lines with '#' as first non space character)
  * and white lines from an input stream.

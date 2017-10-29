@@ -37,6 +37,10 @@ using namespace std;
 void prepareCutoff(vector<vector<bool> >& inputMatrix, vector<string>& genesLabels, int forcedCutoff, bool autoCutoff){
 	vector<int> counter(inputMatrix[0].size());
 
+    for(unsigned int j = 0; j<inputMatrix[0].size(); j++){        // init
+         counter[j]=0;
+    }
+
 	for(unsigned int j = 0; j<inputMatrix[0].size(); j++){        // count number of mutations for each gene
 		for(unsigned int i = 0; i<inputMatrix.size(); i++){
 			counter[j] += inputMatrix[i][j];
@@ -63,7 +67,7 @@ void prepareCutoff(vector<vector<bool> >& inputMatrix, vector<string>& genesLabe
 	}
 
     if(!autoCutoff){         // use cutoff set by the user
-		cutoff = forcedCutoff;
+        cutoff = forcedCutoff-1;
 	}
 
 	cout << "cutoff set with value " << cutoff << endl;
@@ -83,7 +87,7 @@ void prepareCutoff(vector<vector<bool> >& inputMatrix, vector<string>& genesLabe
 	int validCount=0;
 
 	for(unsigned int i = 0 ; i<inputMatrix.size(); i++){                     // update data matrix and
-		if(counter[i]>=cutoff){                                               // genes' labels
+        if(counter[i]>=cutoff){                                               // genes' labels
 			inputMatrix[i].swap(aux[validCount]);
 			genesLabels[i].swap(auxLabels[validCount]);
 			validCount++;
@@ -137,6 +141,91 @@ void countingSort(vector< vector<bool> >& Data, vector<string>& geneLabels, int 
 
 	Data.swap(aux);
 	geneLabels.swap(aux_labels);
+
+}
+
+/**
+ * @brief countNumberOfMutations
+ * counts the number of mutation of a single gene in the data matrix (must be transposed)
+ *
+ * @param Data  data matrix
+ * @param col   gene index
+ * @return      number of mutations of the given gene
+ */
+int countNumberOfMutations(vector< vector<bool> >& Data,int col){
+    int ret = 0;
+    for(bool x : Data[col]){
+        ret+=x;
+    }
+    return ret;
+}
+
+/**
+ * Standard counting sort to order genes by mutation number (high to low)
+ *
+ * @param Data          the input boolean matrix
+ * @param geneLabels    the genes' names corresponding to each column
+ * @param row           the considered row for sorting
+ */
+void sortByOccurences(vector< vector<bool> >& Data, vector<string>& geneLabels){
+
+    transposeMatrix(Data);
+
+    vector< vector<bool>> aux(Data.size());
+
+    for(unsigned int i=0; i<aux.size(); i++){        // initializing auxiliary matrix
+        aux[i] = vector<bool>(Data[0].size());
+    }
+    vector< string > aux_labels(geneLabels.size());
+
+
+    int count[aux[0].size()];                          // counter array
+    for(unsigned int i=0; i<aux[0].size();i++){
+        count[i]=0;
+    }
+
+    int sizes[aux.size()];
+
+    for(unsigned int i=0; i<aux.size(); i++){         // count
+        sizes[i] = countNumberOfMutations(Data,i);
+        count[sizes[i]]++;
+    }
+
+    for(unsigned int i=1; i<aux[0].size(); i++){      // allocation array
+        count[i]+=count[i-1];
+        cout<<count[i-1]<<"-";
+    }
+    cout<<count[aux[0].size()-1]<<endl;
+
+    for(unsigned int i=0; i<geneLabels.size(); i++){  // aux labels' vector init
+        aux_labels.push_back("");
+    }
+
+    for(int i = Data.size()-1; i>=0 ;i--){           // sort
+
+        int elem = sizes[i];
+        int index = count[elem]-1;
+        aux[index].swap(Data[i]);                    // swapping genes' mutations
+
+        aux_labels[index].swap(geneLabels[i]);       // swapping names
+        count[elem]--;
+    }
+
+    for(unsigned int i=0; i<geneLabels.size(); i++){
+        cout<<aux_labels[i]<<"-";
+    }
+    cout<<endl;
+
+    Data.swap(aux);
+
+    geneLabels.swap(aux_labels);                     // change order
+    geneLabels.resize(aux_labels.size());
+
+    std::reverse(Data.begin(), Data.end());
+    std::reverse(geneLabels.begin(), geneLabels.end());
+
+
+    transposeMatrix(Data);
 
 }
 
@@ -240,6 +329,8 @@ bool eliminateRedundantCharacters(vector< vector<bool> >& Data, vector<vector<in
 
 	radixSort(Data, geneLabels);
 
+    sortByOccurences(Data, geneLabels);
+
 	int originalSize = Data[0].size();
 
 	vector< vector<bool>> aux(Data.size());
@@ -274,6 +365,8 @@ bool eliminateRedundantCharacters(vector< vector<bool> >& Data, vector<vector<in
 	}
 
 	Data.swap(aux);
+
+
 
 	/* debug output */
 
